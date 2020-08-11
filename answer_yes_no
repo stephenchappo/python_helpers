@@ -1,0 +1,38 @@
+# modified from http://code.activestate.com/recipes/577058/
+#
+# updated to use python3 syntax
+# set default to None so it's clearer when called from main
+# used print functions instead of raw.input
+# changed c-style print formatting to f-strings
+
+
+
+def query_yes_no(question, default=None):
+  """Ask a yes/no question via input() and return their answer.
+
+  "question" is a string that is presented to the user.
+  "default" is the presumed answer if the user just hits <Enter>.
+      It must be "yes", "no" (the default) or None (meaning
+      an answer is required of the user).
+
+  The "answer" return value is one of "yes" or "no".
+  """
+  valid = {'yes': 'yes', 'y': 'yes', 'ye': 'yes',
+           'no': 'no', 'n': 'no'}
+  if not default:
+    prompt = " [y/n] "
+  elif default == 'yes':
+    prompt = " [Y/n] "
+  elif default == 'no':
+    prompt = " [y/N] "
+  else:
+    raise ValueError(f"Invalid default answer: '{default}'")
+
+  while True:
+    choice = input(question + prompt).lower()
+    if default is not None and choice == '':
+      return default
+    elif choice in valid.keys():
+      return valid[choice]
+    else:
+      print("Please respond with 'y' or 'n'.")
